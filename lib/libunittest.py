@@ -84,3 +84,7 @@ def add_testcase_list(testcases):
 
 	__testsuite.addTests(alltests)
 # }
+
+class CustomTextTestRunner(unittest.TextTestRunner):
+	def _makeResult(self):
+		return CustomTestResult(self.stream, self.descriptions, self.verbosity)
