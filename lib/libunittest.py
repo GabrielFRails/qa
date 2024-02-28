@@ -71,3 +71,16 @@ class CustomTestResult(unittest.TextTestResult):
 				print(f"{test} ... {outcome} [{elapsed_time:.3f}s]")
 
 		#self.print_sorted_results()
+
+__testsuite = unittest.TestSuite()
+def add_testcase_list(testcases):
+# {
+	global __testsuite
+
+	alltests = list()
+	for t in testcases:
+		testlist = unittest.TestLoader().loadTestsFromTestCase(t)
+		alltests.append(testlist)
+
+	__testsuite.addTests(alltests)
+# }
