@@ -88,3 +88,8 @@ def add_testcase_list(testcases):
 class CustomTextTestRunner(unittest.TextTestRunner):
 	def _makeResult(self):
 		return CustomTestResult(self.stream, self.descriptions, self.verbosity)
+
+def run():
+	result = CustomTextTestRunner(verbosity=3).run(__testsuite)
+	result.print_summary()
+	return result
