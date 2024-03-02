@@ -18,6 +18,16 @@ class TestPokemonEndpoint(unittest.TestCase):
 	def test_pokemon_info_structure(self):
 		_test_pokemon_info_structure(self)
 
+class TestAbilitiesEndpoint(unittest.TestCase):
+	def setUp(self):
+		return True
+
+	def tearDown(self):
+		return True
+
+	def test_pokemon_abilities(self):
+		_test_pokemon_abilities(self)
+
 def _test_pokemon_list(u):
 # {
 	url = "https://pokeapi.co/api/v2/pokemon/"
@@ -87,6 +97,15 @@ def _test_pokemon_info_structure(u):
 			u.assertEqual(type(pokemon_info[k]), pokemon_info_dict[k])
 # }
 
+def _test_pokemon_abilities(u):
+# {
+	url = "https://pokeapi.co/api/v2/ability/1"
+	r = requests.get(url)
+	r_status_code = r.status_code
+	u.assertEqual(r_status_code, 200)
+# }
+
 testcaselist_pokeapi = [
 	TestPokemonEndpoint,
+	TestAbilitiesEndpoint
 ]
