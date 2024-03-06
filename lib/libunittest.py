@@ -33,7 +33,7 @@ class CustomTestResult(unittest.TextTestResult):
 		elapsed_time = time.time() - self.start_time
 
 		test_id = test.id()
-		report_testid = self.get_test_name()
+		report_testid = self.get_test_report_id(test_id)
 
 		self.results.append((report_testid, outcome, elapsed_time))
 
