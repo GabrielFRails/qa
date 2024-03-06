@@ -1,0 +1,2 @@
+- testcase_{api group}.py for each group
+- tescase_api_availability.py, must be the first to run
