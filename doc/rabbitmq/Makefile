@@ -11,3 +11,9 @@ pipinstall_pika:
 
 runall: base_install set_user_and_password pipinstall_pika
 	echo "all done"
+
+start_rabbitmq_server:
+	sudo systemctl start rabbitmq-server
+
+stop_rabbitmq_server:
+	sudo systemctl stop rabbitmq-server
