@@ -32,11 +32,8 @@ class CustomTestResult(unittest.TextTestResult):
 	def save_result(self, test, outcome):
 		elapsed_time = time.time() - self.start_time
 
-		testid_splited = test.id().split('.')
-		testname = testid_splited[2]
-		testcase = testid_splited[1]
-		testcase_list = testid_splited[0]
-		report_testid = f"{testname} ({testcase_list}.{testcase})"
+		test_id = test.id()
+		report_testid = self.get_test_name()
 
 		self.results.append((report_testid, outcome, elapsed_time))
 
@@ -71,6 +68,16 @@ class CustomTestResult(unittest.TextTestResult):
 				print(f"{test} ... {outcome} [{elapsed_time:.3f}s]")
 
 		#self.print_sorted_results()
+
+	def get_test_report_id(self, test_id):
+		testid_splited = test_id.split('.')
+  
+		testname = testid_splited[2]
+		testcase = testid_splited[1]
+		testcase_list = testid_splited[0]
+
+		report_testid = f"{testname} ({testcase_list}.{testcase})"
+		return report_testid		
 
 __testsuite = unittest.TestSuite()
 def add_testcase_list(testcases):
