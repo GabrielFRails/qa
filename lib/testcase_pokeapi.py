@@ -28,6 +28,16 @@ class TestAbilitiesEndpoint(unittest.TestCase):
 	def test_pokemon_abilities(self):
 		_test_pokemon_abilities(self)
 
+class TestGenerationEndpoint(unittest.TestCase):
+	def setUp(self):
+		return True
+
+	def tearDown(self):
+		return True
+
+	def test_generation_list(self):
+		_test_generation_list(self)
+
 def _test_pokemon_list(u):
 # {
 	url = "https://pokeapi.co/api/v2/pokemon/"
@@ -105,7 +115,22 @@ def _test_pokemon_abilities(u):
 	u.assertEqual(r_status_code, 200)
 # }
 
+def _test_generation_list(u):
+# {
+	url = "https://pokeapi.co/api/v2/generation/"
+	r = requests.get(url)
+	r_status_code = r.status_code
+	u.assertEqual(r_status_code, 200)
+
+	response = r.json()
+	u.assertEqual(type(response), dict)
+
+	generations = response['results']
+	u.assertEqual(type(generations), list)
+# }
+
 testcaselist_pokeapi = [
 	TestPokemonEndpoint,
-	TestAbilitiesEndpoint
+	TestAbilitiesEndpoint,
+	TestGenerationEndpoint
 ]
