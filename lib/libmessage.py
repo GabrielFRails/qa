@@ -4,6 +4,7 @@
 #
 
 import pika
+import json
 
 def send_message(message: str, queue_name: str):
 # {
@@ -11,6 +12,17 @@ def send_message(message: str, queue_name: str):
 	channel = connection.channel()
 	channel.queue_declare(queue=queue_name)
 	channel.basic_publish(exchange='', routing_key=queue_name, body=message)
+# }
+
+def generate_unittest_message(testid: str, test_status: str) -> str:
+# {
+	message = {
+		"testid": testid,
+		"test_status": test_status
+	}
+
+	msg_json = json.dumps(message)
+	return msg_json
 # }
 
 __pika_connection = None
