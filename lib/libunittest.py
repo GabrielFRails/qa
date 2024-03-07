@@ -42,7 +42,8 @@ class CustomTestResult(unittest.TextTestResult):
 
 		test_id = test.id()
 		report_testid = self.get_test_report_id(test_id)
-
+		msg = generate_unittest_message(report_testid, outcome)
+		send_message(msg, 'unittest')
 		self.results.append((report_testid, outcome, elapsed_time))
 
 		if outcome == "FAIL":
