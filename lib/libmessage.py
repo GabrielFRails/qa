@@ -5,7 +5,7 @@
 
 import pika
 
-def send_message(message: str, queue_name="default"):
+def send_message(message: str, queue_name: str):
 # {
 	connection = get_pika_conection()
 	channel = connection.channel()
