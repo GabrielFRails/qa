@@ -2,8 +2,12 @@
 # Copyright (c) Gabriel Freitas: gabriel.estudy.reis@gmail.com
 # Wrapper for unittest: python unit testing framework
 
+# system imports
 import unittest
 import time
+
+# local libs import
+from libmessage import *
 
 class CustomTestResult(unittest.TextTestResult):
 	def __init__(self, *args, **kwargs):
@@ -15,6 +19,9 @@ class CustomTestResult(unittest.TextTestResult):
 
 	def startTest(self, test):
 		super().startTest(test)
+		test_id = test.id()
+		report_testid = self.get_test_report_id(test_id)
+		send_message(report_testid, 'unittest')
 		self.start_time = time.time()
 
 	def addSuccess(self, test):
