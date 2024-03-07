@@ -21,7 +21,8 @@ class CustomTestResult(unittest.TextTestResult):
 		super().startTest(test)
 		test_id = test.id()
 		report_testid = self.get_test_report_id(test_id)
-		send_message(report_testid, 'unittest')
+		msg = generate_unittest_message(report_testid, 'running')
+		send_message(msg, 'unittest')
 		self.start_time = time.time()
 
 	def addSuccess(self, test):
