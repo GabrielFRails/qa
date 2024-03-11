@@ -5,6 +5,8 @@
 
 import pika
 import json
+import time
+import datetime
 
 def send_message(message: str, queue_name: str):
 # {
@@ -16,14 +18,26 @@ def send_message(message: str, queue_name: str):
 
 def generate_unittest_message(testid: str, test_status: str) -> str:
 # {
+	ts = time.time()
 	message = {
-		"testid": testid,
-		"test_status": test_status
+		"testid_str": testid,
+		"test_status": test_status,
+		"ts": ts,
+		"ts_str": convert_ts_to_date(ts)
 	}
 
 	msg_json = json.dumps(message)
 	return msg_json
 # }
+
+def convert_ts_to_date(timestamp):
+    # Convert timestamp to datetime object
+    dt_object = datetime.datetime.fromtimestamp(timestamp)
+    
+    # Format datetime object as HH:mm:ss
+    formatted_time = dt_object.strftime('%Y-%m-%d %H:%M:%S')
+    
+    return formatted_time
 
 __pika_connection = None
 def get_pika_conection():
