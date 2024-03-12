@@ -2,8 +2,9 @@
 # Copyright (c) Gabriel Freitas: gabriel.estudy.reis@gmail.com
 #
 
+from librequest import *
+
 import unittest
-import requests
 
 class TestPokemonEndpoint(unittest.TestCase):
 	def setUp(self):
@@ -41,7 +42,7 @@ class TestGenerationEndpoint(unittest.TestCase):
 def _test_pokemon_list(u):
 # {
 	url = "https://pokeapi.co/api/v2/pokemon/"
-	r = requests.get(url)
+	r = request_get(url)
 	r_status_code = r.status_code
 	u.assertEqual(r_status_code, 200)
 
@@ -84,7 +85,7 @@ pokemon_info_dict = {
 def _test_pokemon_info_structure(u):
 # {
 	url = "https://pokeapi.co/api/v2/pokemon/"
-	r = requests.get(url)
+	r = request_get(url)
 	r_status_code = r.status_code
 	u.assertEqual(r_status_code, 200)
 
@@ -95,7 +96,7 @@ def _test_pokemon_info_structure(u):
 	expected_keys_set = set(pokemon_info_dict_keys)
 	for p in pokemon_results:
 		pokemon_url_info = p['url']
-		r = requests.get(pokemon_url_info)
+		r = request_get(pokemon_url_info)
 		u.assertEqual(r_status_code, 200)
 
 		pokemon_info = r.json()
@@ -110,7 +111,7 @@ def _test_pokemon_info_structure(u):
 def _test_pokemon_abilities(u):
 # {
 	url = "https://pokeapi.co/api/v2/ability/1"
-	r = requests.get(url)
+	r = request_get(url)
 	r_status_code = r.status_code
 	u.assertEqual(r_status_code, 200)
 # }
@@ -118,7 +119,7 @@ def _test_pokemon_abilities(u):
 def _test_generation_list(u):
 # {
 	url = "https://pokeapi.co/api/v2/generation/"
-	r = requests.get(url)
+	r = request_get(url)
 	r_status_code = r.status_code
 	u.assertEqual(r_status_code, 200)
 
