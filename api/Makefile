@@ -3,3 +3,6 @@ pip_requirements:
 
 start_api:
 	uvicorn unittestapi:app --reload
+
+feed:
+	curl -S localhost:8000/feed
