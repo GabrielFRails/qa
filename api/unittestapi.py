@@ -2,8 +2,8 @@ from fastapi import FastAPI, Request
 from sse_starlette.sse import EventSourceResponse
 
 import pika, aio_pika
-
 import time
+import asyncio
 
 app = FastAPI()
 
@@ -23,8 +23,8 @@ async def unittest_feed_event_generator(request: Request):
 				async with message.process():
 					# Yield the message payload as SSE event
 					yield {"data": message.body.decode()}
-	finally:
-		# Cleanup: Close the channel and connection
+
+	except asyncio.CancelledError:
 		await channel.close()
 		await connection.close()
 # }
