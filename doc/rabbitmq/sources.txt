@@ -1,3 +1,5 @@
 - https://www.rabbitmq.com/docs/install-debian#erlang-repositories
 - https://www.rabbitmq.com/tutorials/tutorial-one-python
 - https://medium.com/analytics-vidhya/how-to-use-rabbitmq-with-python-e0ccfe7fa959
+
+local rabbitmq: http://localhost:15672/
