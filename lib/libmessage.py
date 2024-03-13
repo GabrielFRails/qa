@@ -8,10 +8,8 @@ import json
 import time
 import datetime
 
-def send_message(message: str, queue_name: str):
+def send_message(message: str, queue_name: str, channel):
 # {
-	connection = get_pika_conection()
-	channel = connection.channel()
 	channel.queue_declare(queue=queue_name)
 	channel.basic_publish(exchange='', routing_key=queue_name, body=message)
 # }
