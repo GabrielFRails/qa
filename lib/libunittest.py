@@ -9,6 +9,27 @@ import time
 # local libs import
 from libmessage import *
 
+__pika_connection = None
+def get_pika_connection():
+# {
+	global __pika_connection
+	if not __pika_connection:
+		__pika_connection = message_open_connection()
+
+	return __pika_connection
+# }
+
+__unittest_msg_channel = None
+def get_msg_channel():
+# {
+	global __unittest_msg_channel
+	if not __unittest_msg_channel:
+		connection = get_pika_connection()
+		__unittest_msg_channel = message_open_channel(connection)
+
+	return __unittest_msg_channel
+# }
+
 class CustomTestResult(unittest.TextTestResult):
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
@@ -16,13 +37,14 @@ class CustomTestResult(unittest.TextTestResult):
 		self.fail_results = []
 		self.error_results = []
 		self.total_time = 0
+		self.unittest_msg_channel = get_msg_channel()
 
 	def startTest(self, test):
 		super().startTest(test)
 		test_id = test.id()
 		report_testid = self.get_test_report_id(test_id)
 		msg = generate_unittest_message(report_testid, 'running')
-		send_message(msg, 'unittest')
+		send_message(msg, 'unittest', self.unittest_msg_channel)
 		self.start_time = time.time()
 
 	def addSuccess(self, test):
@@ -43,7 +65,7 @@ class CustomTestResult(unittest.TextTestResult):
 		test_id = test.id()
 		report_testid = self.get_test_report_id(test_id)
 		msg = generate_unittest_message(report_testid, outcome)
-		send_message(msg, 'unittest')
+		send_message(msg, 'unittest', self.unittest_msg_channel)
 		self.results.append((report_testid, outcome, elapsed_time))
 
 		if outcome == "FAIL":
