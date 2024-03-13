@@ -53,3 +53,25 @@ def close_connection():
 	connection = get_pika_conection()
 	connection.close()
 # }
+
+def message_open_connection():
+# {
+	pika_connection =  pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
+	return pika_connection
+# }
+
+def message_close_connection(connection):
+# {
+	connection.close()
+# }
+
+def message_open_channel(connection):
+# {
+	channel = connection.channel()
+	return channel
+# }
+
+def message_close_channel(channel):
+# {
+    channel.close()
+# }
