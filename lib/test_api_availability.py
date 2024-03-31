@@ -162,6 +162,24 @@ class MachinesGroupAvailabilityTestCase(unittest.TestCase):
 			r = request_get(url)
 			self.assertEqual(r.status_code, 200)
 
+class MovesGroupAvailabilityTestCase(unittest.TestCase):
+	def setUp(self):
+		return True
+
+	def tearDown(self):
+		return True
+
+	def test_moves_group_availability(self):
+		moves_group_endpoint_list = [
+			"move", "move-ailment", "move-battle-style", "move-category",
+			"move-damage-class", "move-learn-method", "move-target"
+		]
+
+		for endpoint in moves_group_endpoint_list:
+			url = f"https://pokeapi.co/api/v2/{endpoint}"
+			r = request_get(url)
+			self.assertEqual(r.status_code, 200)
+
 testcaselist_availability = [
 	PokemonGroupAvailabilityTestCase,
 	BerriesGroupAvailabilityTestCase,
@@ -171,5 +189,6 @@ testcaselist_availability = [
 	GamesGroupAvailabilityTestCase,
 	ItemsGroupAvailabilityTestCase,
 	LocationsGroupAvailabilityTestCase,
-	MachinesGroupAvailabilityTestCase
+	MachinesGroupAvailabilityTestCase,
+	MovesGroupAvailabilityTestCase
 ]
