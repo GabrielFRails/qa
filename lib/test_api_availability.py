@@ -19,7 +19,7 @@ class PokemonGroupAvailabilityTestCase(unittest.TestCase):
 			"gender", "growth-rate", "nature", "pokeathlon-stat",
 			"pokemon", "pokemon-color", "pokemon-form", "pokemon-habitat",
 			"pokemon-shape", "pokemon-species", "stat", "type"
-     	]
+		]
 
 		for endpoint in pokemon_group_endpoint_list:
 			url = f"https://pokeapi.co/api/v2/{endpoint}"
@@ -36,7 +36,7 @@ class BerriesGroupAvailabilityTestCase(unittest.TestCase):
 	def test_berries_group_availability(self):
 		pokemon_group_endpoint_list = [
 			"berry", "berry-firmness", "berry-flavor"
-     	]
+		]
 
 		for endpoint in pokemon_group_endpoint_list:
 			url = f"https://pokeapi.co/api/v2/{endpoint}"
