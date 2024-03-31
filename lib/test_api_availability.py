@@ -60,8 +60,26 @@ class ContestGroupAvailabilityTestCase(unittest.TestCase):
 			r = request_get(url)
 			self.assertEqual(r.status_code, 200)
 
+class EncounterGroupAvailabilityTestCase(unittest.TestCase):
+	def setUp(self):
+		return True
+
+	def tearDown(self):
+		return True
+
+	def test_encounter_group_availability(self):
+		pokemon_group_endpoint_list = [
+			"encounter-method", "encounter-condition", "encounter-condition-value"
+		]
+
+		for endpoint in pokemon_group_endpoint_list:
+			url = f"https://pokeapi.co/api/v2/{endpoint}"
+			r = request_get(url)
+			self.assertEqual(r.status_code, 200)
+
 testcaselist_availability = [
 	PokemonGroupAvailabilityTestCase,
 	BerriesGroupAvailabilityTestCase,
-	ContestGroupAvailabilityTestCase
+	ContestGroupAvailabilityTestCase,
+	EncounterGroupAvailabilityTestCase
 ]
