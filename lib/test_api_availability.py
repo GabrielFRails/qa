@@ -43,14 +43,14 @@ class BerriesGroupAvailabilityTestCase(unittest.TestCase):
 			r = request_get(url)
 			self.assertEqual(r.status_code, 200)
 
-class ContestGroupAvailabilityTestCase(unittest.TestCase):
+class ContestsGroupAvailabilityTestCase(unittest.TestCase):
 	def setUp(self):
 		return True
 
 	def tearDown(self):
 		return True
 
-	def test_contest_group_availability(self):
+	def test_contests_group_availability(self):
 		pokemon_group_endpoint_list = [
 			"contest-type", "contest-effect", "super-contest-effect"
 		]
@@ -60,14 +60,14 @@ class ContestGroupAvailabilityTestCase(unittest.TestCase):
 			r = request_get(url)
 			self.assertEqual(r.status_code, 200)
 
-class EncounterGroupAvailabilityTestCase(unittest.TestCase):
+class EncountersGroupAvailabilityTestCase(unittest.TestCase):
 	def setUp(self):
 		return True
 
 	def tearDown(self):
 		return True
 
-	def test_encounter_group_availability(self):
+	def test_encounters_group_availability(self):
 		pokemon_group_endpoint_list = [
 			"encounter-method", "encounter-condition", "encounter-condition-value"
 		]
@@ -111,14 +111,14 @@ class GamesGroupAvailabilityTestCase(unittest.TestCase):
 			r = request_get(url)
 			self.assertEqual(r.status_code, 200)
 
-class ItemGroupAvailabilityTestCase(unittest.TestCase):
+class ItemsGroupAvailabilityTestCase(unittest.TestCase):
 	def setUp(self):
 		return True
 
 	def tearDown(self):
 		return True
 
-	def test_item_group_availability(self):
+	def test_items_group_availability(self):
 		pokemon_group_endpoint_list = [
 			"item", "item-attribute", "item-category", "item-fling-effect", "item-pocket"
 		]
@@ -131,9 +131,9 @@ class ItemGroupAvailabilityTestCase(unittest.TestCase):
 testcaselist_availability = [
 	PokemonGroupAvailabilityTestCase,
 	BerriesGroupAvailabilityTestCase,
-	ContestGroupAvailabilityTestCase,
-	EncounterGroupAvailabilityTestCase,
+	ContestsGroupAvailabilityTestCase,
+	EncountersGroupAvailabilityTestCase,
 	EvolutionGroupAvailabilityTestCase,
 	GamesGroupAvailabilityTestCase,
-	ItemGroupAvailabilityTestCase
+	ItemsGroupAvailabilityTestCase
 ]
