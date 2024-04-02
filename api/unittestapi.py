@@ -1,8 +1,7 @@
 from fastapi import FastAPI, Request
 from sse_starlette.sse import EventSourceResponse
 
-import pika, aio_pika
-import time
+import aio_pika
 import asyncio
 
 app = FastAPI()
