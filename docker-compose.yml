@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: qa_lab-api
+    volumes:
+      - ./api:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - rabbitmq
+
+  lib:
+    build:
+      context: .
+      dockerfile: Dockerfile.lib
+    container_name: qa_lab-lib
+    volumes:
+      - ./lib:/app
+
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    container_name: qa_lab-test
+    volumes:
+      - ./test:/app
+    depends_on:
+      - rabbitmq
+
+  rabbitmq:
+    image: rabbitmq:management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
