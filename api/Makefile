@@ -6,3 +6,6 @@ start_api:
 
 feed:
 	curl -S localhost:8000/feed
+
+log:
+	tail -f api.log
