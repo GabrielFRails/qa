@@ -9,27 +9,6 @@ import time
 # local libs import
 from libmessage import *
 
-__pika_connection = None
-def get_pika_connection():
-# {
-	global __pika_connection
-	if not __pika_connection:
-		__pika_connection = message_open_connection()
-
-	return __pika_connection
-# }
-
-__unittest_msg_channel = None
-def get_msg_channel():
-# {
-	global __unittest_msg_channel
-	if not __unittest_msg_channel:
-		connection = get_pika_connection()
-		__unittest_msg_channel = message_open_channel(connection)
-
-	return __unittest_msg_channel
-# }
-
 class CustomTestResult(unittest.TextTestResult):
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
