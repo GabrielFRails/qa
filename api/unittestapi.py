@@ -4,6 +4,8 @@ from sse_starlette.sse import EventSourceResponse
 import aio_pika
 import asyncio
 
+from libmessage import *
+
 app = FastAPI()
 
 @app.get("/")
@@ -32,3 +34,13 @@ async def unittest_feed_event_generator(request: Request):
 async def unittest_feed(request: Request):
 	event_generator = unittest_feed_event_generator(request)
 	return EventSourceResponse(event_generator)
+
+@app.post("/runtests")
+def runtests():
+	command = "runtests"
+	origin = "unittestapi"
+	msg = generate_command_message(command, origin)
+	channel = get_msg_channel()
+	send_message(msg, "endpoint_tests", channel)
+
+	return {"success": True}
