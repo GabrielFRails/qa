@@ -1,0 +1,10 @@
+FROM python:3.10
+
+WORKDIR /usr/src/test
+
+COPY ../test /usr/src/test
+COPY ../lib /usr/src/test
+
+RUN pip install --no-cache-dir -r pip_requirements.txt
+
+CMD ["python", "-m", "unittest", "discover", "-s", "."]
