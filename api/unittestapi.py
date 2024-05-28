@@ -14,7 +14,7 @@ def read_root():
 
 async def unittest_feed_event_generator(request: Request):
 # {
-	connection = await aio_pika.connect_robust("amqp://guest:guest@localhost/")
+	connection = await aio_pika.connect_robust("amqp://guest:guest@rabbitmq/")
 	channel = await connection.channel()
 	queue = await channel.declare_queue("unittest")
 
@@ -41,6 +41,6 @@ def runtests():
 	origin = "unittestapi"
 	msg = generate_command_message(command, origin)
 	channel = get_msg_channel()
-	send_message(msg, "endpoint_tests", channel)
+	send_message(msg, "test_queue", channel)
 
 	return {"success": True}
