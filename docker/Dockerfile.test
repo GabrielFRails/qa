@@ -7,4 +7,4 @@ COPY ../lib /usr/src/test
 
 RUN pip install --no-cache-dir -r pip_requirements.txt
 
-CMD ["python", "-m", "unittest", "discover", "-s", "."]
+CMD ["python", "test_consumer.py"]
