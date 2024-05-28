@@ -1,0 +1,2 @@
+- criar uma lib de pub/sub usando redis
+- planejar uma estrutura de banco de dados para armazenar dados dos testes
