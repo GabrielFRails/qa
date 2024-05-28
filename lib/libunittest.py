@@ -57,25 +57,25 @@ class CustomTestResult(unittest.TextTestResult):
 
 	def print_sorted_results(self):
 		sorted_results = sorted(self.results, key=lambda x: x[2], reverse=True)
-		print("\nTest Results (Sorted by Time):")
+		log_info("\nTest Results (Sorted by Time):")
 		for test, outcome, elapsed_time in sorted_results:
-			print(f"{test}: {outcome} [{elapsed_time:.3f}s]")
+			log_info(f"{test}: {outcome} [{elapsed_time:.3f}s]")
 
 	def print_summary(self):
-		print("\n\nTest Results:")
-		print(f"Total run time: [{self.total_time:.3f}s]")
+		log_info("\n\nTest Results:")
+		log_info(f"Total run time: [{self.total_time:.3f}s]")
 		for test, outcome, elapsed_time in self.results:
-			print(f"{test} ... {outcome} [{elapsed_time:.3f}s]")
+			log_info(f"{test} ... {outcome} [{elapsed_time:.3f}s]")
 
 		if len(self.fail_results) > 0:
-			print(f"\n\nFail Results ({len(self.fail_results)} failures):")
+			log_info(f"\n\nFail Results ({len(self.fail_results)} failures):")
 			for test, outcome, elapsed_time in self.fail_results:
-				print(f"{test} ... {outcome} [{elapsed_time:.3f}s]")
+				log_info(f"{test} ... {outcome} [{elapsed_time:.3f}s]")
 
 		if len(self.error_results) > 0:
-			print(f"\n\Errors Results ({len(self.error_results)} errors):")
+			log_info(f"\n\Errors Results ({len(self.error_results)} errors):")
 			for test, outcome, elapsed_time in self.error_results:
-				print(f"{test} ... {outcome} [{elapsed_time:.3f}s]")
+				log_info(f"{test} ... {outcome} [{elapsed_time:.3f}s]")
 
 		#self.print_sorted_results()
 

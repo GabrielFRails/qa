@@ -2,6 +2,8 @@ import os
 import pika
 import time
 
+from liblog import *
+
 RABBITMQ_HOST = os.getenv('RABBITMQ_HOST', 'localhost')
 RABBITMQ_PORT = int(os.getenv('RABBITMQ_PORT', '5672'))
 
@@ -19,7 +21,7 @@ class RabbitMQConnection:
 				)
 				break
 			except pika.exceptions.AMQPConnectionError as e:
-				print(f"Connection failed, retrying in 5 seconds: {e}")
+				log_info(f"Connection failed, retrying in 5 seconds: {e}")
 				time.sleep(5)
 
 		return self.connection

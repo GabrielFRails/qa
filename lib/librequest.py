@@ -10,10 +10,10 @@ def request_get(url, timeout=5):
 	try:
 		r = requests.get(url, timeout=timeout)
 	except requests.Timeout:
-		print(f"get request to {url} timeout")
+		log_info(f"get request to {url} timeout")
 		return -1
 	except requests.RequestException as e:
-		print(f"error while trying to fetch {url}: {e}")
+		log_info(f"error while trying to fetch {url}: {e}")
 		return -2
 
 	return r
