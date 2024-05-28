@@ -8,6 +8,7 @@ import time
 
 # local libs import
 from libmessage import *
+from liblog import *
 
 class CustomTestResult(unittest.TextTestResult):
 	def __init__(self, *args, **kwargs):
