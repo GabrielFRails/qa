@@ -5,7 +5,7 @@ start_api:
 	uvicorn unittestapi:app --host 0.0.0.0 --port 8000 --reload
 
 feed:
-	curl -S localhost:8000/feed
+	curl -S localhost:8081/feed
 
 log:
 	tail -f api.log
