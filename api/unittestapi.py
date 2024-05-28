@@ -5,6 +5,7 @@ import aio_pika
 import asyncio
 
 from libmessage import *
+from librabbitmq import *
 
 app = FastAPI()
 
@@ -40,7 +41,8 @@ def runtests():
 	command = "runtests"
 	origin = "unittestapi"
 	msg = generate_command_message(command, origin)
-	channel = get_msg_channel()
-	send_message(msg, "test_queue", channel)
+
+	sender = rabbitmq_new_sender("test_queue")
+	sender.send_message(msg)
 
 	return {"success": True}
