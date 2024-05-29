@@ -12,6 +12,11 @@ from libmessage import *
 from librabbitmq import *
 from liblog import *
 
+TEST_STATUS_RUNNING = "running"
+TEST_STATUS_OK = "ok"
+TEST_STATUS_FAIL = "FAIL"
+TEST_STATUS_ERROR = "ERROR"
+
 class CustomTestResult(unittest.TextTestResult):
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
@@ -26,22 +31,22 @@ class CustomTestResult(unittest.TextTestResult):
 		super().startTest(test)
 		test_id = test.id()
 		report_testid = self.get_test_report_id(test_id)
-		msg = generate_unittest_message(report_testid, 'running')
+		msg = generate_unittest_message(report_testid, TEST_STATUS_RUNNING)
 		self.unittest_sender.send_message(msg)
 		#send_message(msg, 'unittest', self.unittest_msg_channel)
 		self.start_time = time.time()
 
 	def addSuccess(self, test):
 		super().addSuccess(test)
-		self.save_result(test, "ok")
+		self.save_result(test, TEST_STATUS_OK)
 
 	def addError(self, test, err):
 		super().addError(test, err)
-		self.save_result(test, "ERROR")
+		self.save_result(test, TEST_STATUS_ERROR)
 
 	def addFailure(self, test, err):
 		super().addFailure(test, err)
-		self.save_result(test, "FAIL")
+		self.save_result(test, TEST_STATUS_FAIL)
 
 	def save_result(self, test, outcome):
 		elapsed_time = time.time() - self.start_time
@@ -53,10 +58,10 @@ class CustomTestResult(unittest.TextTestResult):
 		self.unittest_sender.send_message(msg)
 		self.results.append((report_testid, outcome, elapsed_time))
 
-		if outcome == "FAIL":
+		if outcome == TEST_STATUS_FAIL:
 			self.fail_results.append((report_testid, outcome, elapsed_time))
 
-		if outcome == "ERROR":
+		if outcome == TEST_STATUS_ERROR:
 			self.error_results.append((report_testid, outcome, elapsed_time))
 
 		self.total_time += elapsed_time
