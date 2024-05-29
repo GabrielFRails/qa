@@ -47,13 +47,9 @@ def generate_command_message(command: str, origin: str) -> str:
 # }
 
 def convert_ts_to_date(timestamp):
-    # Convert timestamp to datetime object
-    dt_object = datetime.datetime.fromtimestamp(timestamp)
-    
-    # Format datetime object as HH:mm:ss
-    formatted_time = dt_object.strftime('%Y-%m-%d %H:%M:%S')
-    
-    return formatted_time
+	dt_object = datetime.datetime.fromtimestamp(timestamp)
+	formatted_time = dt_object.strftime('%Y-%m-%d %H:%M:%S')
+	return formatted_time
 
 __pika_connection = None
 def get_pika_connection():
@@ -102,5 +98,5 @@ def message_open_channel(connection):
 
 def message_close_channel(channel):
 # {
-    channel.close()
+	channel.close()
 # }
