@@ -9,6 +9,7 @@ import time
 
 # local libs import
 from libmessage import *
+from librabbitmq import *
 from liblog import *
 
 class CustomTestResult(unittest.TextTestResult):
@@ -18,14 +19,16 @@ class CustomTestResult(unittest.TextTestResult):
 		self.fail_results = []
 		self.error_results = []
 		self.total_time = 0
-		self.unittest_msg_channel = get_msg_channel()
+		#self.unittest_msg_channel = get_msg_channel()
+		self.unittest_sender = rabbitmq_new_sender("unittest")
 
 	def startTest(self, test):
 		super().startTest(test)
 		test_id = test.id()
 		report_testid = self.get_test_report_id(test_id)
 		msg = generate_unittest_message(report_testid, 'running')
-		send_message(msg, 'unittest', self.unittest_msg_channel)
+		self.unittest_sender.send_message(msg)
+		#send_message(msg, 'unittest', self.unittest_msg_channel)
 		self.start_time = time.time()
 
 	def addSuccess(self, test):
@@ -46,7 +49,8 @@ class CustomTestResult(unittest.TextTestResult):
 		test_id = test.id()
 		report_testid = self.get_test_report_id(test_id)
 		msg = generate_unittest_message(report_testid, outcome)
-		send_message(msg, 'unittest', self.unittest_msg_channel)
+		#send_message(msg, 'unittest', self.unittest_msg_channel)
+		self.unittest_sender.send_message(msg)
 		self.results.append((report_testid, outcome, elapsed_time))
 
 		if outcome == "FAIL":
