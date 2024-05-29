@@ -1,3 +1,7 @@
+# 
+# Copyright (c) 2024 Gabriel Freitas: gabriel.estudy.reis@gmail.com
+#
+
 import logging
 from datetime import datetime
 

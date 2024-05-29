@@ -1,3 +1,7 @@
+# 
+# Copyright (c) 2024 Gabriel Freitas: gabriel.estudy.reis@gmail.com
+#
+
 from fastapi import FastAPI, Request
 from sse_starlette.sse import EventSourceResponse
 

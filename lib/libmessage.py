@@ -1,5 +1,5 @@
 # 
-# Copyright (c) Gabriel Freitas: gabriel.estudy.reis@gmail.com
+# Copyright (c) 2024 Gabriel Freitas: gabriel.estudy.reis@gmail.com
 # Wrapper for rabbitmq and pika
 #
 
